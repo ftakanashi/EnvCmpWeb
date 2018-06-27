@@ -1,0 +1,15 @@
+a.option-text{
+    font-size:20px;
+    font-weight:bold;
+    text-decoration:none;
+    color:grey;
+}
+
+a.option-text:hover,a.option-text:focus{
+    color:black;
+}
+
+table.menu-table{
+    text-align:center;
+    border:0px;
+}

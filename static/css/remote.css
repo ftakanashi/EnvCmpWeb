@@ -1,0 +1,22 @@
+td.submit-cell{
+    padding-top:10px;
+    text-align: center;
+}
+
+img{
+    display:none;
+    width:20px;
+    height:20px;
+}
+
+a.like-button{
+    font-size:20px;
+    text-decoration:none;
+    color:grey;
+    margin:5px;
+}
+a.like-button:hover{
+    text-decoration:none;
+    color:black;
+    cursor:pointer;
+}

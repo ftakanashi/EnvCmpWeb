@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="jquery.treeview.css" rel="stylesheet" />
+</head>
+<body>
+<ul class="filetree" id="treeTest">
+  <li><span class="folder">一级目录</span>
+    <ul>
+        <li><span class="file">一级目录下文件</span></li>
+        <li><span class="folder">二级目录</span>
+            <ul>
+                <li><span class="file">二级目录下文件</span></li>
+            </ul>
+        </li>
+        <li><span class="folder">第二个二级目录</span>
+        </li>
+    </ul>
+  </li>
+</ul>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="jquery.treeview.js"></script>
+<script>
+    $("ul#treeTest").treeview();
+</script>
+</body>
+</html>

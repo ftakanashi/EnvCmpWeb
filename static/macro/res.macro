@@ -1,0 +1,16 @@
+{'ifmbatch@10.253.108.199': [{'WEB-INF': [{'classes': [{'com': [{'hundsun': [{'lcpt': [{'batch': [{'sale': [{'adapter': [{'T209003': [{'action': [{'A15': ['GetHostCheckFileTask.class.bak']}]}]}, {'T209004': [{'action': [{'A15': ['Action209004.class.bak']}]}]}, {'T200511': ['']}]}]}, {'zxfund': [{'T240106': ['']}, {'pub': ['BaseFundTemplateExchangeAdapter.class.bak', {'tafile': [{'io': ['FundDTemplateExchange.class.bak']}]}]}, {'T240028': ['']}]}, {'base': ['BatchAdapter.class.bak']}, {'bta': [{'adapter': [{'T651101': ['']}]}]}, {'bank': [{'A02': [{'service': []}]}, {'A15': [{'service': [{'impl': ['LoadSquareErrServiceImpl.class', 'CreateSquareFileService.class.bak']}]}]}]}]}]}]}]}]}]}]}
+{% macro render(root) %}
+    {% for rootname,subitems in root.iteritems() %}
+        <li><span class="folder">{{ rootname }}</span>
+        <ul>
+            {% for subitem in subitems %}
+                {% if not subitem is string %}
+                    {{ render(subitem) }}
+                {% else %}
+                    <li><span class="file">{{ subitem }}</span></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </li>
+    {% endfor %}
+{% endmacro %}

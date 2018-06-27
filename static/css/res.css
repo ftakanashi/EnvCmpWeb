@@ -1,0 +1,21 @@
+a#downloadResult{
+    color:grey;
+    text-decoration:none;
+}
+
+a#downloadResult:hover{
+    color:black;
+}
+
+div#differ span.file:hover{
+    color:red;
+    cursor:pointer;
+}
+
+.show-differ{
+    display:none;
+    text-decoration:none;
+    color:grey;
+    font-size:12px;
+    padding:0px 5px;
+}

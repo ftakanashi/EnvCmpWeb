@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block title %}对比结果{% endblock %}
+
+{% block styles %}
+    <link href="{{ url_for('static',filename='bootstrap.min.css') }}" rel="stylesheet"/>
+    <link href="{{ url_for('static',filename='jquery-treeview/jquery.treeview.css') }}" rel="stylesheet"/>
+    <link href="{{ url_for('static',filename='css/res.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% macro render(root) %}
+    {% for rootname,subitems in root.iteritems() %}
+        <li><span class="folder">{{ rootname }}</span>
+            <ul>
+                {% for subitem in subitems %}
+                    {% if not subitem is string %}
+                        {{ render(subitem) }}
+                    {% else %}
+                        <li><span class="file">{{ subitem }}</span></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </li>
+    {% endfor %}
+{% endmacro %}
+
+{% block content %}
+    <div class="container">
+        <div class="row" style="text-align:center;">
+            <h1>对比结果</h1>
+            <a href="{{ url_for('static',filename='tmp/result.txt') }}"
+               download="{{ cmp.getLeftDir() }}&{{ cmp.getRightDir() }}.txt" id="downloadResult">下载结果文件</a>
+        </div>
+        {% block page_content %}
+            <ul class="nav nav-tabs">
+                <li><a href="javascript:void(0)" id="left_">{% if lsdf %}{{ cmp.getFullLeftDir() }}{% else %}{{ cmp.getLeftDir() }}{% endif %}</a></li>
+                <li><a href="javascript:void(0)" id="right_">{% if rsdf %}{{ cmp.getFullRightDir() }}{% else %}{{ cmp.getRightDir() }}{% endif %}</a></li>
+                <li><a href="javascript:void(0)" id="differ_">文件名相同内容不同</a></li>
+            </ul>
+
+            <!-- 左目录展示界面 -->
+            {% set leftOnly = cmp.getLeftOnly() %}
+            <div class="container show-res" id="left">
+                <ul class="filetree" id="leftInfo">
+                    {{ render(leftOnly) }}
+                </ul>
+            </div>
+
+            <!-- 右目录展示界面 -->
+            {% set rightOnly = cmp.getRightOnly() %}
+            <div class="container show-res" id="right">
+                <ul class="filetree" id="rightInfo">
+                    {{ render(rightOnly) }}
+                </ul>
+            </div>
+
+            <!-- 内容不同文件展示界面 -->
+            {% set differing = cmp.getFormatDiffering() %}
+            <div class="container show-res" id="differ">
+                <div class="alert alert-warning alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert">&times</button>
+                    点击文本性质文件的文件名可查看具体哪些内容不同<br/>展示界面默认编码为UTF-8，如出现乱码可能是因为文件本身编码不为UTF-8
+                </div>
+                <ul class="filetree" id="differInfo">
+                    {{ render(differing) }}
+                </ul>
+{#                {% for item in cmp.getDiffering() %}#}
+{#                    <p>{{ item }}</p>#}
+{#                {% endfor %}#}
+                <label for="showWidth">展示宽度 </label>
+                <input type="number" id="showWidth" />
+                <br>
+                <label for="isContext">只显示不同处</label>
+                <input type="checkbox" id="isContext" />
+                <br>
+                <label for="isDetailed">细致分析(可分辨编码格式/换行符/文件末换行等因素引起的不同)</label>
+                <input type="checkbox" id="isDetailed" />
+
+                <input type="hidden" id="lsdfInput" value="{{ lsdf }}" />
+                <input type="hidden" id="rsdfInput" value="{{ rsdf }}" />
+            </div>
+
+
+            <a href="{{ url_for('index') }}">
+                <button class="btn btn-default" id="return">返回</button>
+            </a>
+
+        {% endblock %}
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static',filename='js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='jquery-treeview/jquery.treeview.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/res.js') }}"></script>
+{% endblock %}

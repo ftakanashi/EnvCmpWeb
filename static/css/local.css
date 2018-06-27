@@ -1,0 +1,31 @@
+div.show-list{
+    padding-left:10%;
+}
+
+table.dir-table{
+    width:80%;
+    alignment:center;
+}
+
+li>a{
+    color:grey;
+}
+
+li>a:hover,li>a:focus{
+    color:black;
+}
+
+a.like-button{
+    text-decoration:none;
+    font-size:20px;
+    color:grey;
+    margin:5px;
+}
+a.like-button:hover{
+    text-decoration:none;
+    color:black;
+    cursor:pointer;
+}
+.other-input{
+    display: none;
+}
