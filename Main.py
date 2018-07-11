@@ -73,6 +73,26 @@ def remote_cmp():
         downloadThread.start()
         return json.dumps({'code':'200','id':thread_id})
 
+@app.route('/text',methods=['GET','POST'])
+def text_cmp():
+    if request.method == 'GET':
+        return render_template('textcmp.html')
+    elif request.method == 'POST':
+        param = json.loads(request.data)
+        leftFilename = param.get(u'ln')
+        rightFilename = param.get(u'rn')
+        leftContent = param.get(u'lc')
+        rightContent = param.get(u'rc')
+        showWidth = int(param.get(u'sw'))
+        isContexted = param.get(u'ic')
+
+        htmlDiff = HtmlDiff(tabsize=2,wrapcolumn=showWidth,linejunk=IS_LINE_JUNK)
+        with open(os.path.join('static','tmp','tmp.html'),'w') as f:
+            f.write(htmlDiff.make_file(leftContent.split('\n'),rightContent.split('\n'),leftFilename,rightFilename,context=isContexted))
+
+        webbrowser.open(os.path.join('static','tmp','tmp.html'))
+        return json.dumps({})
+
 
 
 

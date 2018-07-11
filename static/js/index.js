@@ -14,4 +14,12 @@ $(document).ready(function(){
     }).mouseleave(function(event){
         $(this).nextAll('p').remove();
     });
+
+    $('a#textCmp').mouseenter(function(event){
+        event.preventDefault();
+        $(this).after('<p>输入自定义的两端文本，比较异同</p>');
+    }).mouseleave(function(event){
+        event.preventDefault();
+        $(this).nextAll('p').remove();
+    });
 });

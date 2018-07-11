@@ -1,0 +1,17 @@
+a.edit-filename:hover{
+    text-decoration: none;
+}
+div#extraParam{
+    display: none;
+    text-align: center;
+    background: lightgray;
+}
+span#toggle{
+    background: darkgray;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 0 0 10px 10px
+}
+span#toggle:hover{
+    color: white;
+}

@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block title %}文本比较{% endblock %}
+
+{% block styles %}
+    <link href="{{ url_for('static',filename='css/bootstrap.min.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static',filename='switch/css/bootstrap3/bootstrap-switch.min.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static',filename='css/textcmp.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row" style="text-align:center;">
+            <h1>文本比较</h1>
+        </div>
+        <hr>
+        {% block page_content %}
+        <div id="extraParam">
+            <input type="hidden" value="70" id="showWidthInput" />
+            <input type="hidden" value="false" id="isContextedCheck"/>
+{#            <div class="container">#}
+{#                <div class="form-group">#}
+{#                    <label class="control-label" for="showWidthInput">展示宽度</label>#}
+{#                    <input class="form-control" id="showWidthInput" type="number" value="70" />#}
+{#                </div>#}
+{#                <div class="form-group">#}
+{#                    <label class="control-label">#}
+{#                        是否只显示不同处#}
+{#                        <input type="checkbox" class="form-control" id="isContextedCheck" />#}
+{#                    </label>#}
+{#                </div>#}
+{#            </div>#}
+        </div>
+        <div class="row" style="text-align:center;margin-top:-17px;margin-bottom:17px;">
+            <span id="toggle">更多选项</span>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="row">
+                            <div class="form-group col-lg-6">
+                                <label class="control-label" for="leftFilename">左文件名</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="leftFilename" value="left.txt" readonly/>
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default edit-save-filename">编辑</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="leftText">左文本</label>
+                            <textarea class="form-control" id="leftText" rows="18"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="row">
+                            <div class="form-group col-lg-6">
+                                <label class="control-label" for="rightFilename">右文件名</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="rightFilename" value="right.txt" readonly />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default edit-save-filename" type="button">编辑</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="rightText">右文本</label>
+                            <textarea class="form-control" id="rightText" rows="18"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="text-align: center">
+            <button type="button" class="btn btn-primary" id="submit">提交</button>
+            <a type="button" class="btn btn-default" href="{{ url_for('index') }}">返回</a>
+        </div>
+        {% endblock %}
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static',filename='js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='layer/layer.js') }}"></script>
+    <script src="{{ url_for('static',filename='switch/js/bootstrap-switch.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/textcmp.js') }}"></script>
+{% endblock %}
